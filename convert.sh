@@ -18,8 +18,8 @@ if [[ "$readme_content" != "$body_content" ]]; then
     # Replace the body content of index.html with the content of README.md
     sed -i '/<body>/,/<\/body>/c\<body>\n'"$readme_content"'\n</body>' index.html
     echo "index.html has been updated with the content of README.md"
-    echo "The following changes have been made:"
-    diff <(echo "$body_content") <(echo "$readme_content")
+    echo "The following changes readme_content made:"
+    echo "$readme_content"
 else
     echo "The contents of README.md and index.html are equivalent."
 fi
