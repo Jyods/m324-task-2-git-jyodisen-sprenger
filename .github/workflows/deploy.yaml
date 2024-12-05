@@ -1,0 +1,28 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Ändere dies zu deinem Hauptbranch, falls anders
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Repository klonen
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 2. Shell-Skript ausführen
+    - name: Run convert.sh
+      run: |
+        chmod +x convert.sh # Stelle sicher, dass es ausführbar ist
+        ./convert.sh
+
+    # 3. GitHub Pages Deployment
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: . # Ändere zu dem Ordner, den `convert.sh` erstellt
